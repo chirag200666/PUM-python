@@ -9,12 +9,13 @@ from django.views.decorators.csrf import csrf_protect, csrf_exempt
 from django.core.context_processors import csrf
 
 def Home(request):
-	MERCHANT_KEY = "JBZaLc"
-	key="JBZaLc"
-	SALT = "GQs7yium"
-	PAYU_BASE_URL = "https://test.payu.in/_payment"
+	MERCHANT_KEY = ""
+	key=""
+	SALT = ""
+	PAYU_BASE_URL = "https://sandboxsecure.payu.in/_payment"
 	action = ''
 	posted={}
+	# Merchant Key and Salt provided y the PayU.
 	for i in request.POST:
 		posted[i]=request.POST[i]
 	hash_object = hashlib.sha256(b'randint(0,20)')
@@ -81,7 +82,7 @@ def failure(request):
 	key=request.POST["key"]
 	productinfo=request.POST["productinfo"]
 	email=request.POST["email"]
-	salt="GQs7yium"
+	salt=""
 	try:
 		additionalCharges=request.POST["additionalCharges"]
 		retHashSeq=additionalCharges+'|'+salt+'|'+status+'|||||||||||'+email+'|'+firstname+'|'+productinfo+'|'+amount+'|'+txnid+'|'+key
