@@ -18,9 +18,9 @@ from django.conf.urls import include, url
 from django.contrib import admin
 from polls.views import Home,success,failure
 urlpatterns = [ 
-    url(r'^admin/', include(admin.site.urls)),
-    url(r'^home/',Home),
-    url(r'^Success/',success),
-    url(r'^Failure/',failure),
+    path('admin/', include(admin.site.urls)),
+    path('home/',Home),
+    path('Success/',success),
+    path('Failure/',failure),
     
 ]
