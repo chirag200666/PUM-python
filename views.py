@@ -34,6 +34,7 @@ def Home(request):
 			hash_string+=''
 		hash_string+='|'
 	hash_string+=SALT
+	hash_string = hash_string.encode('utf-8')
 	hashh=hashlib.sha512(hash_string).hexdigest().lower()
 	action =PAYU_BASE_URL
 	if(posted.get("key")!=None and posted.get("txnid")!=None and posted.get("productinfo")!=None and posted.get("firstname")!=None and posted.get("email")!=None):
@@ -62,6 +63,7 @@ def success(request):
 		retHashSeq=additionalCharges+'|'+salt+'|'+status+'|||||||||||'+email+'|'+firstname+'|'+productinfo+'|'+amount+'|'+txnid+'|'+key
 	except Exception:
 		retHashSeq = salt+'|'+status+'|||||||||||'+email+'|'+firstname+'|'+productinfo+'|'+amount+'|'+txnid+'|'+key
+	retHashSeq = retHashSeq.encode('utf-8')
 	hashh=hashlib.sha512(retHashSeq).hexdigest().lower()
 	if(hashh !=posted_hash):
 		print "Invalid Transaction. Please try again"
@@ -91,6 +93,7 @@ def failure(request):
 		retHashSeq=additionalCharges+'|'+salt+'|'+status+'|||||||||||'+email+'|'+firstname+'|'+productinfo+'|'+amount+'|'+txnid+'|'+key
 	except Exception:
 		retHashSeq = salt+'|'+status+'|||||||||||'+email+'|'+firstname+'|'+productinfo+'|'+amount+'|'+txnid+'|'+key
+	retHashSeq = retHashSeq.encode('utf-8')
 	hashh=hashlib.sha512(retHashSeq).hexdigest().lower()
 	if(hashh !=posted_hash):
 		print "Invalid Transaction. Please try again"
