@@ -19,9 +19,10 @@ def Home(request):
 	# Merchant Key and Salt provided y the PayU.
 	for i in request.POST:
 		posted[i]=request.POST[i]
-	hash_object = hashlib.sha256(b'randint(0,20)')
-	txnid=hash_object.hexdigest()[0:20]
-	hashh = ''
+	random_int = str(randint(0, 10000)).encode('utf-8')
+    hash_object = hashlib.sha256(random_int)
+    txnid=hash_object.hexdigest()[0:20]
+    hashh = ''
 	posted['txnid']=txnid
 	hashSequence = "key|txnid|amount|productinfo|firstname|email|udf1|udf2|udf3|udf4|udf5|udf6|udf7|udf8|udf9|udf10"
 	posted['key']=key
